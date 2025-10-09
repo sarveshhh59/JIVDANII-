@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('MongoDB error:', err));
 
-// ✅ User Model
+// ✅ User Schema & Model
 const User = mongoose.models.User || mongoose.model('User', new mongoose.Schema({
   name: String,
   email: String,
@@ -20,7 +20,15 @@ const User = mongoose.models.User || mongoose.model('User', new mongoose.Schema(
   password: String
 }));
 
-// ✅ Health Check Route
+// ✅ Order Schema & Model
+const Order = mongoose.models.Order || mongoose.model('Order', new mongoose.Schema({
+  name: String,
+  email: String,
+  type: String,
+  details: String
+}));
+
+// ✅ Health Check
 app.get('/', (req, res) => {
   res.send('✅ Backend is running');
 });
@@ -63,7 +71,23 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// ✅ Start Server (Render-compatible)
+// ✅ Order Route
+app.post('/order', async (req, res) => {
+  try {
+    const orderData = {
+      ...req.body,
+      email: req.body.email?.trim().toLowerCase()
+    };
+    await new Order(orderData).save();
+    console.log('📦 New order received from:', orderData.email);
+    res.json({ message: 'Order received' });
+  } catch (err) {
+    console.error('Order error:', err);
+    res.status(500).json({ message: 'Order failed' });
+  }
+});
+
+// ✅ Start Server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Backend running on port ${PORT}`);
