@@ -33,15 +33,21 @@ app.get('/', (req, res) => {
   res.send('✅ Backend is running');
 });
 
-// ✅ Registration Route
+// ✅ Registration Route with Duplicate Check
 app.post('/register', async (req, res) => {
   try {
-    const userData = {
-      ...req.body,
-      email: req.body.email?.trim().toLowerCase()
-    };
+    const email = req.body.email?.trim().toLowerCase();
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(409).json({ message: 'User already exists. Please login instead.' });
+    }
+
+    // Save new user
+    const userData = { ...req.body, email };
     await new User(userData).save();
-    console.log('✅ New user registered:', userData.email);
+    console.log('✅ New user registered:', email);
     res.json({ message: 'Registration successful' });
   } catch (err) {
     console.error('Register error:', err);
