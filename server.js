@@ -7,12 +7,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// ✅ MongoDB Connection (Use Atlas or Render env variable)
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/jivdanii';
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log('✅ MongoDB connected'))
+// ✅ MongoDB Connection (Atlas via Render)
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('MongoDB error:', err));
 
 // ✅ User Model
