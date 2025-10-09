@@ -7,8 +7,9 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// ✅ MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/jivdanii', {
+// ✅ MongoDB Connection (Use Atlas or Render env variable)
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/jivdanii';
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('✅ MongoDB connected'))
@@ -30,8 +31,12 @@ app.get('/', (req, res) => {
 // ✅ Registration Route
 app.post('/register', async (req, res) => {
   try {
-    await new User(req.body).save();
-    console.log('✅ New user registered:', req.body.email);
+    const userData = {
+      ...req.body,
+      email: req.body.email?.trim().toLowerCase()
+    };
+    await new User(userData).save();
+    console.log('✅ New user registered:', userData.email);
     res.json({ message: 'Registration successful' });
   } catch (err) {
     console.error('Register error:', err);
@@ -61,7 +66,8 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// ✅ Start Server
-app.listen(3000, () => {
-  console.log('✅ Backend running on http://localhost:3000');
+// ✅ Start Server (Render-compatible)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Backend running on port ${PORT}`);
 });
