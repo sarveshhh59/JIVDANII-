@@ -28,7 +28,16 @@
     <form id="orderForm">
       <input type="text" id="order-name" name="name" placeholder="Your Name" required>
       <input type="email" id="order-email" name="email" placeholder="Email Address" required>
-      <input type="text" id="order-type" name="type" placeholder="Order Type (e.g. Metal Tag, Screen Print)" required>
+
+      <select id="order-type" name="type" required>
+        <option value="" disabled selected>Select Order Type</option>
+        <option value="Metal Tag">Metal Tag</option>
+        <option value="Screen Print">Screen Print</option>
+        <option value="Sticker Label">Sticker Label</option>
+        <option value="Nameplate">Nameplate</option>
+        <option value="Custom Design">Custom Design</option>
+      </select>
+
       <textarea id="order-details" name="details" placeholder="Order Details" rows="4" required></textarea>
       <button type="submit">Place Order</button>
     </form>
