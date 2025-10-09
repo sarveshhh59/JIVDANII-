@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register | JIVDANII PRINTING PROCESS</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <header>
+    <h1>JIVDANII PRINTING PROCESS</h1>
+    <p>Crafting Precision in Metal & Screen Printing</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="services.html">Services</a>
+    <a href="order.html">Order</a>
+    <a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <h2>Register</h2>
+    <form id="registerForm">
+      <input type="text" id="reg-name" name="name" placeholder="Full Name" required>
+      <input type="email" id="reg-email" name="email" placeholder="Email Address" required>
+      <input type="text" id="reg-phone" name="phone" placeholder="Mobile Number" required>
+      <input type="password" id="reg-password" name="password" placeholder="Create Password" required>
+      <button type="submit">Register</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 JIVDANII PRINTING PROCESS. Designed for distinction.</p>
+  </footer>
+
+  <!-- ✅ Registration Logic with SweetAlert -->
+  <script>
+    function validateRegistration() {
+      const phone = document.getElementById("reg-phone").value;
+      const password = document.getElementById("reg-password").value;
+
+      if (!/^\d{10}$/.test(phone)) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Invalid Mobile Number',
+          text: 'Mobile number must be exactly 10 digits.'
+        });
+        return false;
+      }
+
+      if (password.length < 6) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Weak Password',
+          text: 'Password must be at least 6 characters.'
+        });
+        return false;
+      }
+
+      return true;
+    }
+
+    document.getElementById("registerForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      if (!validateRegistration()) return;
+
+      const data = {
+        name: document.getElementById("reg-name").value,
+        email: document.getElementById("reg-email").value,
+        phone: document.getElementById("reg-phone").value,
+        password: document.getElementById("reg-password").value
+      };
+
+      try {
+        const response = await fetch("http://localhost:3000/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.message === "Registration successful") {
+          Swal.fire({
+            icon: 'success',
+            title: 'Registration Successful!',
+            text: 'You will now be redirected to the login page.',
+            confirmButtonText: 'Proceed'
+          }).then(() => {
+            localStorage.setItem("isRegistered", "true");
+            window.location.href = "login.html";
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
+            text: 'Please try again.'
+          });
+        }
+      } catch (err) {
+        console.error("Request error:", err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Server Error',
+          text: 'Registration failed. Check console.'
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

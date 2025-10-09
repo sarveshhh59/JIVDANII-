@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Place Order | JIVDANII PRINTING PROCESS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>JIVDANII PRINTING PROCESS</h1>
+    <p>Crafting Precision in Metal & Screen Printing</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="services.html">Services</a>
+    <a href="order.html">Order</a>
+    <a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html" class="active">Login</a>
+  </nav>
+
+  <main>
+    <h2>Place Your Order</h2>
+    <form id="orderForm" onsubmit="return validateOrderForm()">
+      <input type="text" id="name" name="name" placeholder="Full Name" required>
+      <input type="email" id="email" name="email" placeholder="Email Address" required>
+      <input type="text" id="phone" name="phone" placeholder="Mobile Number" required>
+      
+      <select id="service" name="service" required>
+        <option value="">Choose a Service</option>
+        <option value="metal">Metal Label Printing</option>
+        <option value="screen">Screen Printing</option>
+        <option value="consult">Design Consultation</option>
+      </select>
+
+      <textarea id="details" name="details" placeholder="Describe Your Requirements" rows="6" required></textarea>
+      <button type="submit">Submit Request</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 JIVDANII PRINTING PROCESS. Designed for distinction.</p>
+  </footer>
+
+  <script>
+    function validateOrderForm() {
+      const phone = document.getElementById("phone").value;
+
+      if (!localStorage.getItem("isRegistered")) {
+        alert("Please register before placing an order.");
+        window.location.href = "register.html";
+        return false;
+      }
+
+      if (!/^\d{10}$/.test(phone)) {
+        alert("Please enter a valid 10-digit mobile number.");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
+
+</body>
+</html>

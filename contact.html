@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us | JIVDANII PRINTING PROCESS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>JIVDANII PRINTING PROCESS</h1>
+    <p>Crafting Precision in Metal & Screen Printing</p>
+  </header>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="services.html">Services</a>
+    <a href="order.html">Order</a>
+    <a href="register.html">Register</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html" class="active">Login</a>
+  </nav>
+
+  <main>
+    <h2>Contact Us</h2>
+    <p>We’re here to help. Whether you have a question, need a quote, or want to discuss a custom project, feel free to reach out.</p>
+
+    <h3>Business Address</h3>
+    <p>JIVDANII PRINTING PROCESS<br>
+    Kurla East, Mumbai, Maharashtra<br>
+    India – 400024</p>
+
+    <h3>Phone & Email</h3>
+    <p>📞 +91 98765 43210<br>
+    📧 contact@jivdaniiprinting.com</p>
+
+    <h3>Send Us a Message</h3>
+    <form id="contactForm">
+      <input type="text" id="contact-name" name="name" placeholder="Your Name" required>
+      <input type="email" id="contact-email" name="email" placeholder="Your Email" required>
+      <textarea id="contact-message" name="message" placeholder="Your Message" rows="6" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 JIVDANII PRINTING PROCESS. Designed for distinction.</p>
+  </footer>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById("contact-name").value,
+        email: document.getElementById("contact-email").value,
+        message: document.getElementById("contact-message").value
+      };
+
+      try {
+        const response = await fetch("http://localhost:3000/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+        alert(result.message || "Message sent successfully.");
+        document.getElementById("contactForm").reset();
+      } catch (err) {
+        alert("Failed to send message. Please try again.");
+        console.error("Contact error:", err);
+      }
+    });
+  </script>
+
+</body>
+</html>
