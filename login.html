@@ -10,7 +10,7 @@
 
   <header>
     <h1>JIVDANII PRINTING PROCESS</h1>
-    <p>Welcome back! Please log in.</p>
+    <p>Login to access your account and place orders</p>
   </header>
 
   <nav>
@@ -19,8 +19,8 @@
     <a href="services.html">Services</a>
     <a href="order.html">Order</a>
     <a href="register.html">Register</a>
-    <a href="contact.html">Contact</a>
     <a href="login.html" class="active">Login</a>
+    <a href="contact.html">Contact</a>
   </nav>
 
   <main>
@@ -40,40 +40,33 @@
     document.getElementById("loginForm").addEventListener("submit", async function(e) {
       e.preventDefault();
 
-      const data = {
-        email: document.getElementById("login-email").value.trim().toLowerCase(),
-        password: document.getElementById("login-password").value
-      };
+      const email = document.getElementById("login-email").value.trim().toLowerCase();
+      const password = document.getElementById("login-password").value;
 
       try {
         const response = await fetch("https://jivdanii.onrender.com/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
+          body: JSON.stringify({ email, password })
         });
 
         const result = await response.json();
 
         if (result.message === "Login successful") {
+          localStorage.setItem("userEmail", email); // ✅ Store login session
           Swal.fire({
             icon: 'success',
-            title: 'Welcome back!',
-            text: 'Login successful. Redirecting to order page...',
+            title: 'Login Successful',
+            text: 'Welcome back!',
             confirmButtonText: 'Proceed'
           }).then(() => {
             window.location.href = "order.html";
           });
-        } else if (result.message === "Invalid credentials") {
-          Swal.fire({
-            icon: 'error',
-            title: 'Invalid Credentials',
-            text: 'Please check your email and password.'
-          });
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Unexpected Response',
-            text: result.message || 'Something went wrong.'
+            title: 'Login Failed',
+            text: result.message || 'Invalid credentials. Please try again.'
           });
         }
       } catch (err) {
@@ -81,7 +74,7 @@
         Swal.fire({
           icon: 'error',
           title: 'Server Error',
-          text: 'Login failed. Check console.'
+          text: 'Login failed. Please try again later.'
         });
       }
     });
