@@ -22,18 +22,9 @@ body.dark-mode {
 }
 
 /* Layout Containers */
-header, nav, footer {
-  padding: 2rem 3rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-main {
-  display: flex;
-  justify-content: flex-end;
-  padding: 3rem;
-  max-width: 1400px;
+header, nav, main, footer {
+  padding: 2rem;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -41,6 +32,7 @@ main {
 header {
   background-color: #222;
   color: white;
+  text-align: center;
 }
 
 body.dark-mode header {
@@ -49,7 +41,7 @@ body.dark-mode header {
 }
 
 header h1 {
-  font-size: 2.75rem;
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -99,11 +91,12 @@ body.dark-mode nav a.active {
   color: inherit;
   border: 1px solid currentColor;
   padding: 0.5rem 1rem;
-  margin: 0.5rem;
+  margin: 0.5rem auto;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9rem;
   transition: background-color 0.3s ease;
+  display: block;
 }
 
 #darkToggle:hover {
@@ -118,14 +111,13 @@ body.dark-mode #darkToggle {
 main h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  text-align: right;
-  width: 100%;
+  text-align: center;
 }
 
 form {
   width: 100%;
   max-width: 600px;
-  margin-left: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
@@ -178,7 +170,8 @@ footer {
   background-color: #222;
   color: white;
   font-size: 0.9rem;
-  padding: 2rem 3rem;
+  text-align: center;
+  padding: 2rem;
 }
 
 body.dark-mode footer {
@@ -196,23 +189,11 @@ body.dark-mode footer {
     font-size: 1rem;
   }
 
-  main {
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-  }
-
-  main h2 {
-    text-align: center;
-  }
-
   form {
     width: 90%;
-    margin: 0 auto;
   }
 
   input, select, textarea, button {
-    text-align: left;
     font-size: 1rem;
   }
 }
