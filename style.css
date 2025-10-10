@@ -23,8 +23,8 @@ body.dark-mode {
 
 /* Layout Containers */
 header, nav, footer {
-  padding: 1rem 2rem;
-  max-width: 1200px;
+  padding: 2rem 3rem;
+  max-width: 1400px;
   margin: 0 auto;
   text-align: center;
 }
@@ -32,8 +32,8 @@ header, nav, footer {
 main {
   display: flex;
   justify-content: flex-end;
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 3rem;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -49,12 +49,13 @@ body.dark-mode header {
 }
 
 header h1 {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   margin-bottom: 0.5rem;
 }
 
 header p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
 }
 
 /* Navigation */
@@ -63,15 +64,16 @@ nav {
   flex-wrap: wrap;
   justify-content: center;
   background-color: #333;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 nav a {
   color: white;
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+  font-size: 1rem;
 }
 
 nav a:hover {
@@ -115,7 +117,7 @@ body.dark-mode #darkToggle {
 /* Main Content */
 main h2 {
   font-size: 2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   text-align: right;
   width: 100%;
 }
@@ -126,11 +128,11 @@ form {
   margin-left: auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 input, select, textarea, button {
-  padding: 0.75rem;
+  padding: 0.85rem;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -176,6 +178,7 @@ footer {
   background-color: #222;
   color: white;
   font-size: 0.9rem;
+  padding: 2rem 3rem;
 }
 
 body.dark-mode footer {
@@ -186,13 +189,17 @@ body.dark-mode footer {
 /* Responsive Design */
 @media screen and (max-width: 768px) {
   header h1 {
-    font-size: 1.75rem;
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
   }
 
   main {
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
+    padding: 2rem;
   }
 
   main h2 {
