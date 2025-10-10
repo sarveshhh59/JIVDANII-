@@ -19,15 +19,18 @@ body.dark-mode {
   color: #e0e0e0;
 }
 
+/* Layout Containers */
 header, nav, main, footer {
-  padding: 1rem;
-  text-align: center;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Header */
 header {
   background-color: #222;
   color: white;
+  text-align: center;
 }
 
 body.dark-mode header {
@@ -36,12 +39,12 @@ body.dark-mode header {
 }
 
 header h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
 header p {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 /* Navigation */
@@ -50,13 +53,13 @@ nav {
   flex-wrap: wrap;
   justify-content: center;
   background-color: #333;
+  gap: 0.5rem;
 }
 
 nav a {
   color: white;
   text-decoration: none;
   padding: 0.5rem 1rem;
-  margin: 0.25rem;
   border-radius: 4px;
   transition: background-color 0.3s ease;
 }
@@ -80,12 +83,13 @@ body.dark-mode nav a.active {
 
 /* Main Content */
 main h2 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 form {
-  max-width: 400px;
+  max-width: 600px;
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
@@ -148,13 +152,13 @@ body.dark-mode footer {
 }
 
 /* Responsive Design */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   header h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   main h2 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 
   nav {
