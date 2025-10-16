@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Order | JIVDANII PRINTING PROCESS</title>
+  <title>Place Order – JIVDANII PRINTING PROCESS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -10,100 +11,88 @@
 
   <header>
     <h1>JIVDANII PRINTING PROCESS</h1>
-    <p>Place your custom printing order below</p>
+    <p>Crafting Precision in Metal & Screen Printing</p>
   </header>
 
   <nav>
     <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
     <a href="order.html" class="active">Order</a>
     <a href="register.html">Register</a>
-    <a href="login.html">Login</a>
     <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
   </nav>
 
+  <!-- 🌙 Dark Mode Toggle -->
+  <button id="darkToggle">🌙 Dark Mode</button>
+
   <main>
-    <h2>Order Form</h2>
+    <h2>Place Your Order</h2>
+
     <form id="orderForm">
-      <input type="text" id="order-name" name="name" placeholder="Your Name" required>
-
-      <select id="order-type" name="type" required>
-        <option value="" disabled selected>Select Order Type</option>
-        <option value="Metal Tag">Metal Tag</option>
-        <option value="Screen Print">Screen Print</option>
-        <option value="Sticker Label">Sticker Label</option>
-        <option value="Nameplate">Nameplate</option>
-        <option value="Custom Design">Custom Design</option>
+      <input type="text" placeholder="Your Name" required>
+      <select required>
+        <option value="">Select Order Type</option>
+        <option value="metal">Metal Printing</option>
+        <option value="screen">Screen Printing</option>
       </select>
-
-      <textarea id="order-details" name="details" placeholder="Order Details" rows="4" required></textarea>
+      <textarea placeholder="Order Details" rows="4" required></textarea>
       <button type="submit">Place Order</button>
     </form>
+
+    <!-- 💳 Payment Section -->
+    <section id="paymentSection" style="display: none;">
+      <h3>Choose a Payment Method</h3>
+      <p>Your order has been placed. You can complete payment now or later.</p>
+
+      <div class="payment-options">
+        <button>💳 Credit/Debit Card</button>
+        <button>📱 UPI (Google Pay / PhonePe / Paytm)</button>
+        <button>🏦 Bank Transfer</button>
+        <button onclick="skipPayment()">Skip Payment</button>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 JIVDANII PRINTING PROCESS. Designed for distinction.</p>
+    <p>&copy; 2023 JIVDANII PRINTING PROCESS. Designed for distinction.</p>
   </footer>
 
+  <!-- ✅ Scripts -->
   <script>
-    // ✅ Check login status before allowing order
-    const userEmail = localStorage.getItem("userEmail");
-    if (!userEmail) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Login Required',
-        text: 'Please login before placing an order.',
-        confirmButtonText: 'Go to Login'
-      }).then(() => {
-        window.location.href = "login.html";
-      });
-    }
+    // 🌙 Dark Mode Toggle
+    const toggleBtn = document.getElementById("darkToggle");
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      toggleBtn.textContent = document.body.classList.contains("dark-mode")
+        ? "☀️ Light Mode"
+        : "🌙 Dark Mode";
+    });
 
-    // ✅ Submit order
-    document.getElementById("orderForm").addEventListener("submit", async function(e) {
+    // ✅ Order Submission Logic
+    const orderForm = document.getElementById("orderForm");
+    orderForm.addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const data = {
-        name: document.getElementById("order-name").value,
-        email: userEmail,
-        type: document.getElementById("order-type").value,
-        details: document.getElementById("order-details").value
-      };
-
-      try {
-        const response = await fetch("https://jivdanii.onrender.com/order", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        if (result.message === "Order received") {
-          Swal.fire({
-            icon: 'success',
-            title: 'ORDER CONFIRMED!',
-            text: 'Thank you for your order. We will contact you shortly.',
-            confirmButtonText: 'OK'
-          });
-          document.getElementById("orderForm").reset();
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Order Failed',
-            text: result.message || 'Please try again.'
-          });
-        }
-      } catch (err) {
-        console.error("Order error:", err);
-        Swal.fire({
-          icon: 'error',
-          title: 'Server Error',
-          text: 'Order submission failed. Check console.'
-        });
-      }
+      Swal.fire({
+        icon: 'success',
+        title: 'Order Placed',
+        text: 'Your order has been submitted successfully!',
+        confirmButtonText: 'Proceed to Payment'
+      }).then(() => {
+        document.getElementById("paymentSection").style.display = "block";
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      });
     });
+
+    // ✅ Skip Payment Logic
+    function skipPayment() {
+      Swal.fire({
+        icon: 'info',
+        title: 'Payment Skipped',
+        text: 'You can complete payment later from your dashboard.'
+      });
+    }
   </script>
 
 </body>
