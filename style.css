@@ -91,7 +91,7 @@ body.dark-mode nav a.active {
   color: inherit;
   border: 1px solid currentColor;
   padding: 0.5rem 1rem;
-  margin: 0.5rem auto;
+  margin: 1rem auto;
   border-radius: 4px;
   cursor: pointer;
   font-size: 0.9rem;
@@ -165,6 +165,48 @@ body.dark-mode button:hover {
   background-color: #666;
 }
 
+/* Payment Section */
+#paymentSection {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+#paymentSection h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.payment-options button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.payment-options button:hover {
+  background-color: #555;
+}
+
+body.dark-mode .payment-options button {
+  background-color: #444;
+}
+
+body.dark-mode .payment-options button:hover {
+  background-color: #666;
+}
+
 /* Footer */
 footer {
   background-color: #222;
@@ -195,5 +237,9 @@ body.dark-mode footer {
 
   input, select, textarea, button {
     font-size: 1rem;
+  }
+
+  .payment-options button {
+    width: 90%;
   }
 }
